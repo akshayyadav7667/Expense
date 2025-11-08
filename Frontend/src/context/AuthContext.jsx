@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 
 
 export const AuthContextProvider = ({ children }) => {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = "https://expense-backend-7a3y.onrender.com";
 
   const [currentUser, setCurrentUser] = useState(null);
   const [userId, setUserId] = useState(null);
