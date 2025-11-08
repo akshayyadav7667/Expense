@@ -76,6 +76,7 @@ export const TransactionContextProvider = ({ children }) => {
     summary, 
     fetchTransactions,
     transactions,
+    setTransactions
   };
 
   return (

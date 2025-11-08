@@ -162,3 +162,30 @@ export const getTransactionSummary = async (req, res) => {
     });
   }
 };
+
+
+export const deleteTransaction = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user;
+
+    // Find and delete only the user's transaction
+    const transaction = await Transaction.findOneAndDelete({ _id: id, userId });
+
+    if (!transaction) {
+      return res.status(404).json({ message: "Transaction not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Transaction deleted successfully",
+      deletedTransaction: transaction,
+    });
+  } catch (error) {
+    console.error("Delete transaction error:", error);
+    res.status(500).json({ 
+      success: false, 
+      message: "Server error" 
+    });
+  }
+};

@@ -58,7 +58,7 @@ const AddTransaction = () => {
   return (
     <div className="bg-gradient-to-br from-white to-blue-50 border border-gray-200 p-8 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
-        💰 Add New Transaction
+        Add New Transaction
       </h2>
 
       <form
@@ -149,7 +149,7 @@ const AddTransaction = () => {
           disabled={loading}
           className={`${
             loading
-              ? "bg-blue-400 cursor-not-allowed"
+              ? "  bg-gradient-to-br from-blue-300 to-blue-500  bg-blue-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700"
           } text-white py-2.5 rounded-lg md:col-span-2 font-semibold mt-2 transition`}
         >
