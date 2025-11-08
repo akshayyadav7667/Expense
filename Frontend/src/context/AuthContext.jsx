@@ -4,7 +4,6 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 
 export const AuthContext = createContext();
 
-
 export const AuthContextProvider = ({ children }) => {
   const backendUrl = "https://expense-backend-7a3y.onrender.com";
 
@@ -19,26 +18,21 @@ export const AuthContextProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const checkAuthStatus = async () => {
       if (token) {
         try {
-         
           const response = await fetch(`${backendUrl}/api/user/profile`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
 
-          
-
           if (response.ok) {
             const userData = await response.json();
             setCurrentUser(userData);
             setUserId(userData.id);
           }
-
         } catch (error) {
           console.error("Auth check failed:", error);
           localStorage.removeItem("token");
@@ -50,8 +44,6 @@ export const AuthContextProvider = ({ children }) => {
 
     checkAuthStatus();
   }, [token, backendUrl]);
-
-
 
   const login = async (email, password) => {
     try {
@@ -79,8 +71,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  
-
   const register = async (name, email, password) => {
     try {
       const response = await fetch(`${backendUrl}/api/user/register`, {
@@ -95,14 +85,12 @@ export const AuthContextProvider = ({ children }) => {
       console.log(data);
 
       if (response.ok) {
-        setToken(data.token);
-        setCurrentUser(data.user);
-        setUserId(data.user.id);
-        localStorage.setItem("token", data.token);
         return { success: true, user: data.user };
       } else {
         return { success: false, message: data.message };
       }
+
+      
     } catch (error) {
       return { success: false, message: "Network error occurred" };
     }
@@ -129,5 +117,3 @@ export const AuthContextProvider = ({ children }) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-

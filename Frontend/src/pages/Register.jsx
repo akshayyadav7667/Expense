@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { register } from "../../../Backend/controllers/userController";
 import { AuthContext } from "../context/AuthContext";
 
@@ -10,24 +10,31 @@ export default function Register() {
     password: "",
   });
 
-  const {register}= useContext(AuthContext);
+  const { register } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
-  const handleChange =  (e) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Register form submitted:", formData);
+    // console.log("Register form submitted:", formData);
 
-    const result= await register(formData.name,formData.email,formData.password);
+    const result = await register(
+      formData.name,
+      formData.email,
+      formData.password
+    );
 
-    console.log(result);
+    // console.log(result);
 
-    
+
     if (result.success) {
+      // Optional: show alert before redirect
+      alert("Registration successful! Redirecting to login...");
       navigate("/login");
     } else {
       setError(result.message);
